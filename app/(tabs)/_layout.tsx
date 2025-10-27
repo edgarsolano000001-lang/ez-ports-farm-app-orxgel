@@ -23,6 +23,11 @@ export default function TabLayout() {
       icon: 'tray.fill',
     },
     {
+      route: '/(tabs)/profile',
+      label: 'Profile',
+      icon: 'person.fill',
+    },
+    {
       route: '/(tabs)/admin',
       label: 'Admin',
       icon: 'gear',
@@ -36,6 +41,7 @@ export default function TabLayout() {
           <Stack.Screen name="(home)" />
           <Stack.Screen name="cart" />
           <Stack.Screen name="inbox" />
+          <Stack.Screen name="profile" />
           <Stack.Screen name="admin" />
         </Stack>
         <FloatingTabBar tabs={tabs} />
@@ -49,6 +55,7 @@ export default function TabLayout() {
         <Stack.Screen name="(home)" />
         <Stack.Screen name="cart" />
         <Stack.Screen name="inbox" />
+        <Stack.Screen name="profile" />
         <Stack.Screen name="admin" />
       </Stack>
       <FloatingTabBar tabs={tabs} />

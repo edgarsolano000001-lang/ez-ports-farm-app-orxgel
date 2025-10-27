@@ -101,6 +101,7 @@ export default function AdminScreen() {
             <TextInput
               style={styles.input}
               placeholder="(555) 123-4567"
+              placeholderTextColor={colors.textSecondary}
               value={phoneNumber}
               onChangeText={setPhoneNumber}
               keyboardType="phone-pad"
@@ -112,6 +113,7 @@ export default function AdminScreen() {
             <TextInput
               style={styles.input}
               placeholder="Account Number"
+              placeholderTextColor={colors.textSecondary}
               value={accountNumber}
               onChangeText={setAccountNumber}
               secureTextEntry
@@ -123,6 +125,7 @@ export default function AdminScreen() {
             <TextInput
               style={styles.input}
               placeholder="PIN"
+              placeholderTextColor={colors.textSecondary}
               value={pin}
               onChangeText={setPin}
               secureTextEntry
@@ -135,6 +138,7 @@ export default function AdminScreen() {
             <TextInput
               style={styles.input}
               placeholder="29.99"
+              placeholderTextColor={colors.textSecondary}
               value={price}
               onChangeText={setPrice}
               keyboardType="decimal-pad"
@@ -206,8 +210,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 12,
     fontSize: 16,
+    color: colors.text,
     borderWidth: 1,
-    borderColor: '#E0E0E0',
+    borderColor: '#404040',
   },
   addButton: {
     backgroundColor: colors.primary,
@@ -234,7 +239,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 3,
   },

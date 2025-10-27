@@ -15,23 +15,23 @@ export default function WarningModal({ visible, onClose, type }: WarningModalPro
     switch (type) {
       case 'portout':
         return (
-          <ScrollView style={styles.scrollContent} showsVerticalScrollIndicator={false}>
+          <ScrollView style={styles.scrollContent} showsVerticalScrollIndicator={true}>
             <View style={styles.iconContainer}>
               <IconSymbol name="exclamationmark.triangle.fill" size={48} color={colors.highlight} />
             </View>
             
-            <Text style={styles.mainTitle}>IMPORTANT INFORMATION</Text>
+            <Text style={[styles.mainTitle, { color: colors.highlight }]}>IMPORTANT INFORMATION</Text>
             
             <Text style={styles.bodyText}>
               You&apos;re purchasing a Port-Out Number that can be ported exclusively to:
             </Text>
             
             <View style={styles.carrierList}>
-              <Text style={styles.carrierItem}>• Metro By T-Mobile</Text>
-              <Text style={styles.carrierItem}>• AT&amp;T</Text>
-              <Text style={styles.carrierItem}>• Cricket</Text>
-              <Text style={styles.carrierItem}>• Boost Mobile</Text>
-              <Text style={styles.carrierItem}>• T-Mobile</Text>
+              <Text style={styles.carrierItem}>- Metro By T-Mobile</Text>
+              <Text style={styles.carrierItem}>- AT&amp;T</Text>
+              <Text style={styles.carrierItem}>- Cricket</Text>
+              <Text style={styles.carrierItem}>- Boost Mobile</Text>
+              <Text style={styles.carrierItem}>- T-Mobile</Text>
             </View>
 
             <View style={styles.section}>
@@ -43,7 +43,7 @@ export default function WarningModal({ visible, onClose, type }: WarningModalPro
 
             <View style={styles.section}>
               <View style={styles.sectionHeader}>
-                <Text style={styles.sectionTitle}>Area Code Flexibility</Text>
+                <Text style={[styles.sectionTitle, { color: colors.teal }]}>Area Code Flexibility</Text>
                 <IconSymbol name="exclamationmark.circle.fill" size={24} color={colors.teal} />
               </View>
               <Text style={styles.bodyText}>
@@ -58,12 +58,18 @@ export default function WarningModal({ visible, onClose, type }: WarningModalPro
               </Text>
             </View>
 
-            <Pressable
-              style={[styles.button, { backgroundColor: colors.buttonBlue }]}
-              onPress={onClose}
-            >
-              <Text style={styles.buttonText}>I UNDERSTAND</Text>
-            </Pressable>
+            <View style={styles.spacer} />
+            <View style={styles.spacer} />
+            <View style={styles.spacer} />
+
+            <View style={styles.buttonCutoffContainer}>
+              <Pressable
+                style={[styles.button, { backgroundColor: colors.buttonBlue }]}
+                onPress={onClose}
+              >
+                <Text style={styles.buttonText}>I UNDERSTAND</Text>
+              </Pressable>
+            </View>
           </ScrollView>
         );
 
@@ -165,7 +171,7 @@ export default function WarningModal({ visible, onClose, type }: WarningModalPro
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
@@ -230,12 +236,19 @@ const styles = StyleSheet.create({
     color: colors.text,
     textAlign: 'center',
   },
+  spacer: {
+    height: 20,
+  },
+  buttonCutoffContainer: {
+    height: 60,
+    overflow: 'hidden',
+    marginTop: 8,
+  },
   button: {
     paddingVertical: 16,
     paddingHorizontal: 32,
     borderRadius: 8,
     alignItems: 'center',
-    marginTop: 32,
   },
   buttonText: {
     color: '#FFFFFF',

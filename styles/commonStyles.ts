@@ -2,16 +2,16 @@
 import { StyleSheet, ViewStyle, TextStyle } from 'react-native';
 
 export const colors = {
-  background: '#F5F5F5',
-  text: '#212121',
-  textSecondary: '#757575',
+  background: '#212121',
+  text: '#FFFFFF',
+  textSecondary: '#B0B0B0',
   primary: '#6200EE',
   secondary: '#03DAC5',
   accent: '#BB86FC',
-  card: '#FFFFFF',
+  card: '#2C2C2C',
   highlight: '#FF61A3',
   buttonBlue: '#3100BD',
-  teal: '#00D6C2',
+  teal: '#29D1C1',
 };
 
 export const commonStyles = StyleSheet.create({
@@ -27,7 +27,7 @@ export const commonStyles = StyleSheet.create({
     marginHorizontal: 16,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 3,
   },
