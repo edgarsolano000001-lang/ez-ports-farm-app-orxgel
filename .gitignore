@@ -1,3 +1,4 @@
+
 node_modules/
 
 .git/
@@ -23,6 +24,8 @@ yarn-error.*
 .DS_Store
 *.pem
 
+# Environment variables - keep .env for template, but ignore .env.local
+.env.local
 .env*.local
 
 *.tsbuildinfo

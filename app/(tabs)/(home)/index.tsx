@@ -4,15 +4,19 @@ import { View, Text, StyleSheet, FlatList, Pressable, Platform } from 'react-nat
 import { Stack } from 'expo-router';
 import { colors, commonStyles } from '@/styles/commonStyles';
 import { useApp } from '@/contexts/AppContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { PhoneNumber } from '@/types/PhoneNumber';
 import { IconSymbol } from '@/components/IconSymbol';
 import WarningModal from '@/components/WarningModal';
+import SupabaseConfigBanner from '@/components/SupabaseConfigBanner';
 
 export default function HomeScreen() {
   const { availableNumbers, addToCart, cart } = useApp();
+  const { isConfigured } = useAuth();
   const [showPortoutModal, setShowPortoutModal] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [hasSeenWarnings, setHasSeenWarnings] = useState(false);
+  const [showConfigBanner, setShowConfigBanner] = useState(true);
 
   useEffect(() => {
     // Show warnings on app open
@@ -97,6 +101,10 @@ export default function HomeScreen() {
             {availableForPurchase.length} numbers available
           </Text>
         </View>
+
+        {!isConfigured && showConfigBanner && (
+          <SupabaseConfigBanner onDismiss={() => setShowConfigBanner(false)} />
+        )}
 
         <FlatList
           data={availableForPurchase}

@@ -1,3 +1,4 @@
+
 {
   "expo": {
     "name": "Natively",
@@ -41,7 +42,10 @@
       "typedRoutes": true
     },
     "extra": {
-      "router": {}
+      "router": {},
+      "eas": {
+        "projectId": "rgayzlgixuxfmdplyoum"
+      }
     }
   }
 }

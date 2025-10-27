@@ -23,6 +23,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!isConfigured) {
+      console.log('⚠️ Supabase is not configured. Authentication features are disabled.');
+      console.log('📝 To enable authentication:');
+      console.log('   1. Open the .env file in your project root');
+      console.log('   2. Add your Supabase anon key');
+      console.log('   3. Restart the Expo development server');
+      console.log('   4. Get your keys from: https://supabase.com/dashboard/project/rgayzlgixuxfmdplyoum/settings/api');
       setLoading(false);
       return;
     }
@@ -32,12 +38,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
+      console.log('✅ Supabase connected successfully');
+    }).catch((error) => {
+      console.error('❌ Error getting session:', error);
+      setLoading(false);
     });
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       setUser(session?.user ?? null);
+      console.log('🔄 Auth state changed:', _event);
     });
 
     return () => subscription.unsubscribe();
@@ -45,23 +56,68 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const signIn = async (email: string, password: string) => {
     if (!isConfigured) {
-      return { error: { message: 'Supabase not configured' } };
+      return { 
+        error: { 
+          message: 'Supabase not configured. Please update your .env file with Supabase credentials.' 
+        } 
+      };
     }
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    return { error };
+    
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        console.error('❌ Sign in error:', error.message);
+      } else {
+        console.log('✅ Signed in successfully');
+      }
+      return { error };
+    } catch (error: any) {
+      console.error('❌ Sign in exception:', error);
+      return { error: { message: error.message || 'An error occurred during sign in' } };
+    }
   };
 
   const signUp = async (email: string, password: string) => {
     if (!isConfigured) {
-      return { error: { message: 'Supabase not configured' } };
+      return { 
+        error: { 
+          message: 'Supabase not configured. Please update your .env file with Supabase credentials.' 
+        } 
+      };
     }
-    const { error } = await supabase.auth.signUp({ email, password });
-    return { error };
+    
+    try {
+      const { error } = await supabase.auth.signUp({ 
+        email, 
+        password,
+        options: {
+          emailRedirectTo: 'https://natively.dev/email-confirmed'
+        }
+      });
+      if (error) {
+        console.error('❌ Sign up error:', error.message);
+      } else {
+        console.log('✅ Signed up successfully - check email for verification');
+      }
+      return { error };
+    } catch (error: any) {
+      console.error('❌ Sign up exception:', error);
+      return { error: { message: error.message || 'An error occurred during sign up' } };
+    }
   };
 
   const signOut = async () => {
-    if (!isConfigured) return;
-    await supabase.auth.signOut();
+    if (!isConfigured) {
+      console.log('⚠️ Supabase not configured');
+      return;
+    }
+    
+    try {
+      await supabase.auth.signOut();
+      console.log('✅ Signed out successfully');
+    } catch (error) {
+      console.error('❌ Sign out error:', error);
+    }
   };
 
   return (
